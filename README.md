@@ -1,7 +1,9 @@
 # WalmartSales
-An exploratory data analysis project in SQL on the publicly available Walmart Sales dataset. The data is available at Princekrampah's Github, https://github.com/Princekrampah/WalmartSalesAnalysis/blob/master/README.md
+An exploratory data analysis project in SQL on the publicly available Walmart Sales dataset. I personally accessed the data on Princekrampah's Github, https://github.com/Princekrampah/WalmartSalesAnalysis/blob/master/README.md
 
-I also used the questions posed on the above Github repository as a guide for the project. I occasionally referred to his code when learning how to create the features, but then tackled the following questions on my own. Many of the questions are quite poorly defined, but I tried to understand them as best as I could. Regardless, they were still useful exercises in practicing constructing SQL queries.
+I also used the questions posed on the above Github repository as a guide for the project. I occasionally referred to his code when learning how to create new columns, but then tackled the following questions on my own. Many of the questions are quite poorly defined, but I tried to understand them as best as I could. Regardless, they were still useful exercises in practicing constructing SQL queries.
+
+
 
 
 ## The Data
@@ -26,6 +28,16 @@ I noticed one serious issue with this dataset. Somewhat misleadingly, tax_pct is
 |gross_margin_pct|The profit percentage the company keeps, after subtracting production costs. Calculated as (gross profit/total revenue) x 100%|
 |gross_income|The flat amount of profit made by the company.|
 |rating|The rating of the order given by the customer.|
+
+
+## The Process
+- Import the data from the .csv file using the Table Data Import Wizard.
+- Rename the tax_pct column to something more reflective, added_vat.
+- Create new features:
+  - time_of_day, by using a CASE statement to classify times as either "Morning", "Afternoon" or "Evening".
+  - day_of_week, by using the DAYNAME function.
+- Go on to answer the below questions, one-by-one.
+
 
 
 ## The Questions
@@ -53,8 +65,7 @@ I noticed one serious issue with this dataset. Somewhat misleadingly, tax_pct is
 3. Which city has the largest tax percent/ VAT (Value Added Tax)?
 4. Which customer type pays the most in VAT?
 
-Customer
-
+#### Customer
 1. How many unique customer types does the data have?
 2. How many unique payment methods does the data have?
 3. What is the most common customer type?
@@ -67,17 +78,10 @@ Customer
 10. Which day of the week has the best average ratings per branch? 
 
 
-## The Process
-- Import the data from the .csv file using the Table Data Import Wizard.
-- Rename the tax_pct column to something more reflective, added_vat.
-- Create new features:
-  - time_of_day, by using a CASE statement to classify times as either "Morning", "Afternoon" or "Evening".
-  - day_of_week, by using the DAYNAME function.
-- Go on to answer the above questions one-by-one.
-
-
 ## Points of Learning
-- Usually, I would use Excel or Python to create new features. It was interesting to understand how this can also be done quite easily within SQL.
-- Learning how to use CASE statements.
-- Learning how to use ALTER TABLE, UPDATE and SET to add new columns.
-- Learning how to use DECLARE and SET to assign a value to a variable. For example, in one question I needed to find the average revenue across all sales within each product line, then compare these to the average revenue across ALL sales. I used DECLARE and SET to save the value of the latter before making these comparisons.
+- Usually, I would use Excel or Python to create new columns. It was interesting to understand how this can also be done quite easily within SQL.
+- This involved learning how to use CASE statements, in order to classify based on other features. They are essentially equivalent to IF statements in other languages.
+- This also involved learning how to use ALTER TABLE to add an empty column, then using UPDATE and SET to populate the empty column.
+- In question 9 of the 'product' questions, I learnt how to use DECLARE and SET to assign a value to a variable. I needed to find the average revenue across all sales within each product line, then compare these to the average revenue across ALL sales. I used DECLARE and SET to save the value of the latter before making these comparisons.
+- I also made the observation that sometimes, business questions can be poorly defined. In these situations, it is important to either interpret them as best as possible based on your own judgement, or reach out to someone to find clarity on what they meant.
+- Finally, the tax_pct column in the data was very misleading. Before starting any analysis, it is important to go through each feature and make sure you understand how it is defined. This can help catch any errors in the data itself before writing any code.
